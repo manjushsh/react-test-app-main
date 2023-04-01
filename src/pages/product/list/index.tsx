@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { FC, useEffect, useState } from "react";
+import { Button, Col, Row } from "antd";
 import { useSearchParams } from "react-router-dom";
 import ResultString from "../../../components/content/result.content";
 import Heading from "../../../components/heading/basic.heading";
@@ -29,6 +30,14 @@ const ProductList: FC = () => {
         hasOffset: true,
         limit: PAGINATION_LIMIT
     });
+    const [contact, setContact] = useState(null);
+
+    const clearFilters = () => {
+        searchParams.delete('contact');
+        setSearchParams(searchParams);
+        setContact(null);
+    }
+
     let contactId = parseInt((searchParams.get('contact') || ''), 10) || null;
     if (Number.isNaN(contactId)) contactId = null;
 
@@ -84,14 +93,33 @@ const ProductList: FC = () => {
     }
     return (
         <>
-            <div style={{ marginBottom: '1rem' }}>
-                <Heading
-                    titleLevel={2}
-                >
-                    Products
-                </Heading>
-                <FilterByContact />
-            </div>
+            <Row style={{ margin: '1rem 0', justifyContent: 'center', alignItems: 'center' }}>
+                <Col sm={10} md={12} lg={12}>
+                    <Heading
+                        titleLevel={2}
+                    >
+                        Products
+                    </Heading>
+                </Col>
+                <Col sm={10} md={8} lg={10}>
+                    <FilterByContact
+                        contact={contact}
+                        setContact={setContact}
+                    />
+                </Col>
+                <Col sm={4} md={4} lg={2}>
+                    <Button
+                        danger
+                        style={{ marginLeft: '.5rem' }}
+                        type="primary"
+                        size="middle"
+                        disabled={!contactId}
+                        onClick={clearFilters}
+                    >
+                        Clear Filters
+                    </Button>
+                </Col>
+            </Row>
             <div
                 style={{
                     backgroundColor: 'white',
