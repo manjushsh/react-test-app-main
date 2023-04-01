@@ -14,7 +14,7 @@ const FilterByContact = ({ contact, setContact }: DefaultProps) => {
         const contactId = searchParams.get('contact') || '';
         const [defaultOption] = (data?.results || []).filter((o: any) => o?.id === parseInt(contactId, 10));
         if (defaultOption && contactId)
-          setContact(defaultOption)
+          setContact(defaultOption);
         callback(data?.results || []);
       })
       .catch(err => console.debug(err));
@@ -48,11 +48,11 @@ const FilterByContact = ({ contact, setContact }: DefaultProps) => {
       cacheOptions
       defaultOptions
       isClearable
-      loadOptions={loadOptions}
       getOptionLabel={o => o.company_name}
       getOptionValue={o => o?.id}
       value={contact || null}
       onChange={handleChangeContact}
+      loadOptions={loadOptions}
       components={{ Option: ContactsOptions }}
       placeholder='Please select a contact to filter...'
     />
