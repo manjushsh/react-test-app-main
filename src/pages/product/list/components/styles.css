@@ -1,0 +1,18 @@
+.custom-option {
+    padding: .75rem;
+    cursor: pointer;
+}
+
+.custom-option:hover {
+    background-color: var(--primary-background-transperent);
+}
+
+.selected_option {
+    background: var(--primary-background) !important;
+    color: var(--primary-text-color) !important;
+}
+
+.option_title {
+    font-weight: bold;
+    padding-bottom: .25rem;
+}
