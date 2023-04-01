@@ -1,12 +1,10 @@
-import { useState } from 'react';
 import AsyncSelect from 'react-select/async';
 import { useSearchParams } from 'react-router-dom';
 import { listSupliers } from '../../../../services/products';
 import './styles.css';
 
-const FilterByContact = () => {
+const FilterByContact = ({ contact, setContact }: DefaultProps) => {
 
-  const [contact, setContact] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
 
   const loadOptions = (inputValue: string, callback: (options: any[]) => void) => {
@@ -56,11 +54,13 @@ const FilterByContact = () => {
       value={contact || null}
       onChange={handleChangeContact}
       components={{ Option: ContactsOptions }}
-      placeholder='Please select a contact'
+      placeholder='Please select a contact to filter...'
     />
   )
 };
 
 export default FilterByContact;
 
-
+export interface DefaultProps{
+  [key: string]: any;
+}
